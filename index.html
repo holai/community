@@ -1,0 +1,205 @@
+ <!--
+ 	(c) Copyright 2020 lu. All Rights Reserved. 
+ 	作者: 路  1270123648@qq.com
+ -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+         <link rel="stylesheet" href="css/bootstrap.min.css" />
+         <script src="js/jquery-3.3.1.min.js"></script> 
+        <script src="js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+		<title>智慧村镇  管理系统</title> 
+	<style>
+		html,body{
+		    width: 100%;
+	        height: 100%;
+	        background-color: rgba(41, 52, 65, 1);
+	        overflow-y: hidden;
+	        font-family:"Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+		} 
+		.celan{
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 150px;
+			height: 100%;
+			padding:0;
+		    overflow: hidden;
+		    whitespace:nowrap;
+		    text-overflow：ellipsis;
+		}
+		.main-content{ 
+		  height: 100%;
+        margin-left: 150px;
+        
+		}  
+		#myiframe{ 
+		background-color:black;
+        width: 100%;
+        height: 100%;
+		}
+		.ch{
+			width: 40px;
+			height:40px;
+			background-color:rgba(41, 52, 65, 1);
+			text-align: center;
+			border-radius: 30px;
+			position: fixed;
+			z-index: 99;
+			top:5px;
+			left:5px;
+			cursor: pointer;
+		
+		}
+	
+		.title{
+			width: 100%;
+			height: 100px;
+			line-height: 100px;
+			font-family: "微软雅黑";
+			background-color: #354457;
+	       font-size: 17px;
+	       color: #fff;
+	       margin-bottom: 0px;
+	          whitespace:nowrap;
+		    text-overflow：ellipsis;
+		}
+		.card{
+		   background-color: rgba(41, 52, 65, 1);
+		   border-radius: 0;
+		   border: none;
+		   text-align: center;
+		   color: #DBDBDB;
+		}
+		.card-header{
+			cursor: pointer;
+		}
+    .my-menu1 {
+    	overflow: hidden;
+       	width: 100%;
+    	 white-space:nowrap;
+         font-size: 16px; 
+         padding:20px 10px 20px 2px ;
+        cursor: pointer;
+        margin-bottom: 0px;
+    }
+   p{
+   	    overflow: hidden;
+    	 white-space:nowrap;
+   	    height: 50px;
+   	    width: 100%;
+   	    text-align:center;
+        background-color: rgba(41, 52, 65, 1);
+       line-height: 50px;
+       padding-left: 20px;
+        margin-bottom: 0px;
+        border-bottom: 1px solid rgba(30, 40, 60, 1);
+        cursor: pointer;
+    }
+
+	</style>
+	</head>
+	<body oncontextmenu="return false" onselectstart="return false">  
+		<!-- oncontextmenu onselectstart    禁止复制 -->
+		
+  <!--   收缩图标 按钮 -->
+   <div class="ch" id="ch">
+   	<i class="fa fa-bars" style="line-height: 40px;font-size: 20px;color: #FFF;"></i>
+   </div>
+   <!--  整个 侧边栏  -->
+	  <div class="celan" id="celan">
+	     <div class="title text-center">智慧村镇</div>
+	     <div id="accordion">    
+             <div class="card">
+                <div class="card-header collapsed card-link fa fa-institution my-menu1" data-toggle="collapse" href="#collapseOne">
+                                村镇管理 <span class="fa fa-caret-left float-right"></span>
+                </div>
+                <div id="collapseOne" class="collapse" data-parent="#accordion">
+                        <p class="my-menu-li" iframelink="villages.html">村镇信息</p>
+                        <p class="my-menu-li" iframelink="government.html">镇政府信息</p>
+                        <p class="my-menu-li" iframelink="committee.html">村委会信息</p>
+                        <p class="my-menu-li" iframelink="table.html">居民列表</p>
+                </div>
+             </div>
+             <div class="card">
+                 <div class="card-header collapsed card-link fa fa-pie-chart my-menu1" data-toggle="collapse" href="#collapseTwo">
+                                数据分析 <span class="fa fa-caret-left float-right"></span>
+                </div>
+                 <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                     <p class="my-menu-li" iframelink="personnel.html">居民分析</p>
+                      <p class="my-menu-li" iframelink="data.html">资料分析</p>
+                     <p class="my-menu-li" iframelink="money.html">财政分析</p>
+                 </div>
+            </div>
+            <div class="card">
+                <div class="card-header collapsed card-link fa fa-eye my-menu1" data-toggle="collapse" href="#collapseFour">
+                               监控设备 <span class="fa fa-caret-left float-right"></span>
+                </div>
+                 <div id="collapseFour" class="collapse" data-parent="#accordion">
+                     <p class="my-menu-li" iframelink="dataadm.html">  村镇监控</p>
+                 </div>
+            </div>
+            <div class="card">
+               <div class="card-header collapsed card-link fa fa-paper-plane my-menu1" data-toggle="collapse" href="#collapsefaw">
+                        管理功能 <span class="fa fa-caret-left float-right"></span>
+                </div>
+                 <div id="collapsefaw" class="collapse" data-parent="#accordion">
+                     <p class="my-menu-li" iframelink="user.html">用户管理</p>
+                 </div>
+            </div>
+            <div class="card">
+                 <div class="card-header collapsed card-link my-menu1 my-menu-li fa fa-car" iframelink="map.html">
+                             村镇地图
+                 </div>
+            </div>
+         </div>   
+    </div>   
+	       <div class="main-content" id="content">
+               <iframe id="myiframe" style="width: 100%;border: none" src="info.html"></iframe>
+           </div>
+    <script>
+    	
+       //  收缩  
+    	$(".my-menu1").click(function(){
+    		var myclass= $(this).find("span").hasClass("fa-rotate-270");
+    		if( myclass){
+    	          $(this).find("span").removeClass("fa-rotate-270");
+    	   }else{
+    	   	     $(".my-menu1").find("span").removeClass("fa-rotate-270");
+    	         $(this).find("span").addClass("fa-rotate-270");    	 
+    	     }
+    	})
+    	
+    	
+       //  导航栏  收缩
+    	var i=0;
+    	$("#ch").click(function(){ 
+    		if(i==0){
+    		$(this).animate({left:"10px"});
+    		  $("#celan").animate({width:"0px"});
+    	        $("#content").animate({marginLeft:"0px"},function(){
+    	        //	$("#myiframe").attr("src",$("#myiframe").attr("src"));
+    	        });
+    	        	
+    	        	
+    	        i=1;
+    	      }else{
+    	      	$(this).animate({left:"5px"});
+    	      	$("#celan").animate({width:"150px"});
+    	        $("#content").animate({marginLeft:"150px"});
+    	        i=0;
+    	      }
+    		});
+    	
+    //  点击 子栏  背景色改变
+      $(".my-menu-li").click(function(){
+      	$(".my-menu-li").css("backgroundColor","rgba(41, 52, 65, 1)").css("borderLeft","0px #000 solid");
+      	$(this).css("backgroundColor","rgba(30, 40, 60, 1)").css("borderLeft","5px #000 solid");
+      	$("#myiframe").attr("src",$(this).attr("iframelink"));
+      })
+    </script>       
+	</body>
+</html>

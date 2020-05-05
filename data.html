@@ -1,0 +1,607 @@
+ <!--
+ 	(c) Copyright 2020 lu. All Rights Reserved. 
+ 	作者: 路  1270123648@qq.com
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+       <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <script src="js/jquery-3.3.1.min.js"></script> 
+        <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/echarts.min.js"></script>
+        <script type="text/javascript" src="theme/dark.js"></script>
+</head>
+<style>
+    html, body {
+        margin: 0px;
+        width: 100%;
+        height: 100%;
+        background: #000;
+    }
+    @media (min-width: 720px) {
+    	html, body {
+        overflow-y: hidden;
+        }
+    }
+
+    #canvas {
+        width: 100%;
+        height: 100%;
+    }
+     #mychartcontainerid1 {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transform: rotateX(0deg) translate3d(0, 0px, 0px) scale3d(1, 1, 1);
+        transform-origin: 100% 100%;
+        animation: contentAnimation 2s;
+    }
+       @keyframes contentAnimation {
+        from {
+            transform: rotateX(60deg);
+        }
+        to {
+            transform: rotateX(0deg);
+        }
+    }
+    
+     .header{
+		  	height: 5%;
+		  	
+		  }
+		  .dropdown{
+		  	position: absolute;
+		  	
+		  	z-index: 5;
+		  	left: 40px;
+		  	top: 10px;
+		  	height: 70%;
+		  }
+		 .dropdown{
+		  	width: 40%;
+		  }
+		  .text{
+		  	color: #DDD;
+		  }
+		  .dropdown-item{
+		  	text-align: center;
+		  	 
+		  	width: 10%;
+		  	padding: 1%;
+		  	margin: 0;
+		  	float: left;
+		  }
+		  .font{
+		  	position: absolute;
+		  	width: 100%;
+		
+		    top: 10px;
+		  }
+		  
+      .contenta{
+		  	height:50%;
+	       padding: 8px;
+		  }
+		  .sex{
+		  	box-shadow: 2px 2px 10px 3px rgba(31, 22, 45, 1);
+            border-radius: 4px;
+		  	width: 100%;
+		  	height: 100%;
+		  }
+		  .sex:hover{
+         box-shadow: 2px 2px 10px 3px rgba(61, 72, 85, 1);
+         border-radius: 3px;
+		  }
+</style>
+<body>
+<div ng-app="education" ng-controller="educationcontroller" style="height: 100%;width: 100%;background-color: #272936">
+    <canvas id="canvas" style="position: fixed;left: 0;top: 0;z-index: 0;"></canvas>
+
+    	<div class="header">
+			 <div class="dropdown">
+    <button type="button" class="btn btn-dark dropdown-toggle text" data-toggle="dropdown">全镇</button>
+    <div class="dropdown-menu dropdown-menu-right bg-secondary" id="dropdown-menu">
+      <li class="dropdown-item" href="#">杨寨村</li>
+      <li class="dropdown-item" href="#">玉王村</li>
+      <li class="dropdown-item" href="#">周庄村</li>
+       <li class="dropdown-item" href="#">周庄村</li>
+       <li class="dropdown-item" href="#">周庄村</li>
+        <li class="dropdown-item" href="#">周庄村</li>
+       <li class="dropdown-item" href="#">周庄村</li>
+        <li class="dropdown-item" href="#">周庄村</li>
+       <li class="dropdown-item" href="#">周庄村</li>
+        <li class="dropdown-item" href="#">周庄村</li>
+       <li class="dropdown-item" href="#">周庄村</li>
+        <li class="dropdown-item" href="#">周庄村</li>
+       <li class="dropdown-item" href="#">周庄村</li>
+        <li class="dropdown-item" href="#">周庄村</li>
+       <li class="dropdown-item" href="#">周庄村</li>
+        <li class="dropdown-item" href="#">周庄村</li>
+       <li class="dropdown-item" href="#">周庄村</li>
+        <li class="dropdown-item" href="#">周庄村</li>
+       <li class="dropdown-item" href="#">周庄村</li>
+    </div>
+  </div>
+ 
+</div>
+     <h4 class="font text-primary text-center">总人数<span class="text-danger">8656</span>人</h4>
+
+      <div id="mychartcontainerid1">
+  <div class="row" style="width: 80%;height:70%;background-color: rgba(0, 0, 0, 0.1);border-radius: 6px;margin: 60px auto auto;">
+    <div class="col-sm-12 col-md-4 contenta">
+		<div class="sex" id="poor"></div>
+	</div>
+	<div class="col-sm-12 col-md-4 contenta">
+		<div class="sex" id="religion"></div>
+	</div>
+	<div class="col-sm-12 col-md-4 contenta">
+		<div class="sex" id="letter"></div>
+	</div>
+	
+	
+	   <div class="col-sm-12 col-md-5 contenta">
+		<div class="sex" id="land"></div>
+      </div>  
+        <div class="col-sm-12 col-md-7 contenta">
+		<div class="sex" id="nation"></div>
+      </div>
+   
+   </div>
+           </div>
+</div>
+<script>
+    function initVars() {
+        pi = Math.PI;
+        ctx = canvas.getContext("2d");
+        canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientHeight;
+        cx = canvas.width / 2;
+        cy = canvas.height / 2;
+        playerZ = -125;
+        playerX = playerY = playerVX = playerVY = playerVZ = pitch = yaw = pitchV = yawV = 0;
+        scale = 600;
+        seedTimer = 0;
+        seedInterval = 30, seedLife = 100;
+        gravity = .02;
+        seeds = new Array();
+        sparkPics = new Array();
+        s = "https://cantelope.org/NYE/";
+        for (i = 1; i <= 10; ++i) {
+            sparkPic = new Image();
+            sparkPic.src = s + "spark" + i + ".png";
+            sparkPics.push(sparkPic);
+        }
+        sparks = new Array();
+        frames = 0;
+    }
+    function rasterizePoint(x, y, z) {
+        var p, d;
+        x -= playerX;
+        y -= playerY;
+        z -= playerZ;
+        p = Math.atan2(x, z);
+        d = Math.sqrt(x * x + z * z);
+        x = Math.sin(p - yaw) * d;
+        z = Math.cos(p - yaw) * d;
+        p = Math.atan2(y, z);
+        d = Math.sqrt(y * y + z * z);
+        y = Math.sin(p - pitch) * d;
+        z = Math.cos(p - pitch) * d;
+        var rx1 = -1000,
+            ry1 = 1,
+            rx2 = 1000,
+            ry2 = 1,
+            rx3 = 0,
+            ry3 = 0,
+            rx4 = x,
+            ry4 = z,
+            uc = (ry4 - ry3) * (rx2 - rx1) - (rx4 - rx3) * (ry2 - ry1);
+        if (!uc) return {
+            x: 0,
+            y: 0,
+            d: -1
+        };
+        var ua = ((rx4 - rx3) * (ry1 - ry3) - (ry4 - ry3) * (rx1 - rx3)) / uc;
+        var ub = ((rx2 - rx1) * (ry1 - ry3) - (ry2 - ry1) * (rx1 - rx3)) / uc;
+        if (!z) z = .000000001;
+        if (ua > 0 && ua < 1 && ub > 0 && ub < 1) {
+            return {
+                x: cx + (rx1 + ua * (rx2 - rx1)) * scale,
+                y: cy + y / z * scale,
+                d: Math.sqrt(x * x + y * y + z * z)
+            };
+        } else {
+            return {
+                x: cx + (rx1 + ua * (rx2 - rx1)) * scale,
+                y: cy + y / z * scale,
+                d: -1
+            };
+        }
+    }
+
+ 
+   
+  
+    function draw() {
+
+        ctx.clearRect(0, 0, cx * 2, cy * 2);
+
+        ctx.fillStyle = "#ff8";
+        for (i = -100; i < 100; i += 3) {
+            for (j = -100; j < 100; j += 4) {
+                x = i;
+                z = j;
+                y = 25;
+                point = rasterizePoint(x, y, z);
+                if (point.d != -1) {
+                    size = 250 / (1 + point.d);
+                    d = Math.sqrt(x * x + z * z);
+                    a = 0.75 - Math.pow(d / 100, 6) * 0.75;
+                    if (a > 0) {
+                        ctx.globalAlpha = a;
+                        ctx.fillRect(point.x - size / 2, point.y - size / 2, size, size);
+                    }
+                }
+            }
+        }
+        ctx.globalAlpha = 1;
+        for (i = 0; i < seeds.length; ++i) {
+            point = rasterizePoint(seeds[i].x, seeds[i].y, seeds[i].z);
+            if (point.d != -1) {
+                size = 200 / (1 + point.d);
+                ctx.fillRect(point.x - size / 2, point.y - size / 2, size, size);
+            }
+        }
+        point1 = new Object();
+        for (i = 0; i < sparks.length; ++i) {
+            point = rasterizePoint(sparks[i].x, sparks[i].y, sparks[i].z);
+            if (point.d != -1) {
+                size = sparks[i].radius * 200 / (1 + point.d);
+                if (sparks[i].alpha < 0) sparks[i].alpha = 0;
+                if (sparks[i].trail.length) {
+                    point1.x = point.x;
+                    point1.y = point.y;
+                    switch (sparks[i].img) {
+                        case sparkPics[0]:
+                            ctx.strokeStyle = "#f84";
+                            break;
+                        case sparkPics[1]:
+                            ctx.strokeStyle = "#84f";
+                            break;
+                        case sparkPics[2]:
+                            ctx.strokeStyle = "#8ff";
+                            break;
+                        case sparkPics[3]:
+                            ctx.strokeStyle = "#fff";
+                            break;
+                        case sparkPics[4]:
+                            ctx.strokeStyle = "#4f8";
+                            break;
+                        case sparkPics[5]:
+                            ctx.strokeStyle = "#f44";
+                            break;
+                        case sparkPics[6]:
+                            ctx.strokeStyle = "#f84";
+                            break;
+                        case sparkPics[7]:
+                            ctx.strokeStyle = "#84f";
+                            break;
+                        case sparkPics[8]:
+                            ctx.strokeStyle = "#fff";
+                            break;
+                        case sparkPics[9]:
+                            ctx.strokeStyle = "#44f";
+                            break;
+                    }
+                    for (j = sparks[i].trail.length - 1; j >= 0; --j) {
+                        point2 = rasterizePoint(sparks[i].trail[j].x, sparks[i].trail[j].y, sparks[i].trail[j].z);
+                        if (point2.d != -1) {
+                            ctx.globalAlpha = j / sparks[i].trail.length * sparks[i].alpha / 2;
+                            ctx.beginPath();
+                            ctx.moveTo(point1.x, point1.y);
+                            ctx.lineWidth = 1 + sparks[i].radius * 10 / (sparks[i].trail.length - j) / (1 + point2.d);
+                            ctx.lineTo(point2.x, point2.y);
+                            ctx.stroke();
+                            point1.x = point2.x;
+                            point1.y = point2.y;
+                        }
+                    }
+                }
+                ctx.globalAlpha = sparks[i].alpha;
+                ctx.drawImage(sparks[i].img, point.x - size / 2, point.y - size / 2, size, size);
+            }
+        }
+    }
+
+    function frame() {
+
+        if (frames > 100000) {
+            seedTimer = 0;
+            frames = 0;
+        }
+        frames++;
+        draw();
+//        requestAnimationFrame(frame);
+    }
+
+    window.addEventListener("resize", function () {
+        canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientHeight;
+        cx = canvas.width / 2;
+        cy = canvas.height / 2;
+    });
+
+    initVars();
+    frame();
+    
+    
+    
+    
+     var poor=echarts.init(document.getElementById('poor'),"dark");
+     var religion=echarts.init(document.getElementById('religion'),"dark");
+      var letter=echarts.init(document.getElementById('letter'),"dark");
+      var land=echarts.init(document.getElementById('land'),"dark");
+            var nation=echarts.init(document.getElementById('nation'),"dark");
+            //  贫困比例
+ var  pooroption = {
+ 	  title : {
+        text: '贫困统计',
+    },
+    tooltip : {
+        show: true,
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        x : 'center',
+        data:['非贫困','贫困'],
+    },
+    toolbox: {
+        show : true,
+        feature : {
+         //   mark : {show: true},    //辅助线
+            dataView : {show: true, readOnly: false},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    series : [
+        {
+            name:'贫困类型',
+            type:'pie',
+            center : ['60%', "55%"],
+            radius : [0, 50],
+            itemStyle : {
+                normal : {
+                    label : {
+                        position : 'inner',
+                  formatter : "{b}\n{d}%"
+                    },
+                    labelLine : {
+                        show : false
+                    }
+                },
+                emphasis : {
+                    label : {
+                        show : true,
+                        formatter : "{b}\n{d}%"
+                    }
+                }
+                
+            },
+            data:[
+                {value:6888, name:'非贫困'},
+                {value:15, name:'贫困'}
+            ]
+        },
+        {
+            name:'贫困类型',
+            type:'pie',
+            center : ['60%',"55%"],
+            radius : [60, 100],
+            data:[
+                {value:335, name:'低保户'},
+                {value:310, name:'五保户'},
+                {value:234, name:'贫困户'},
+            ]
+        },
+       
+    ]
+}; 
+
+
+var religionoption = {
+	  title : {
+        text: '宗教比例',
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        x: 'right',
+        data:['无','佛教','基督教','道教','伊斯兰教',"天主教"]
+    },
+    series: [
+        {
+            name:'访问来源',
+            type:'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data:[
+                {value:335, name:'无'},
+                {value:310, name:'道教'},
+                {value:234, name:'佛教'},
+                {value:135, name:'伊斯兰教'},
+                {value:158, name:'天主教'},
+                {value:135, name:'基督教'},
+            ]
+        }
+    ]
+};
+
+
+var itemStyle = {
+    normal: {
+        opacity: 0.7,
+        borderWidth: 3,
+    }
+};
+var letteroption = {
+
+    title: {
+        text: '信访分析',
+        subtext:"信访人数:6人"
+    },
+    series: [{
+        name: 'pie',
+        type: 'pie',
+        selectedMode: 'single',
+        selectedOffset: 30,
+        clockwise: true,
+
+        labelLine: {
+            normal: {
+                lineStyle: {
+                    color: '#235894'
+                }
+            }
+        },
+        data:[
+            {value:335, name:'环境保护'},
+            {value:310, name:'建设规划'},
+            {value:234, name:'社会保障'},
+            {value:135, name:'维权争议'},
+        ],
+        itemStyle: itemStyle
+    }]
+};
+
+
+
+
+var  landoption = {
+ 	  title : {
+        text: '耕地面积占比',
+        subtext:"总面积:9062公顷"
+    },
+    tooltip : {
+        show: true,
+        formatter: "{a} <br/>{b} : {c} 公顷 ({d}%)"
+    },
+    legend: {
+       left: 'center',
+        data:['耕地','非耕地'],
+    },
+    toolbox: {
+        show : true,
+        feature : {
+         //   mark : {show: true},    //辅助线
+            dataView : {show: true, readOnly: false},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    series : [
+        {
+            name:'贫困类型',
+            type:'pie',
+            radius : ["0%", "90%"],
+            itemStyle : {
+                normal : {
+                    label : {
+                        position : 'inner',
+                  formatter : "{b}\n{d}%"
+                    },
+                    labelLine : {
+                        show : false
+                    }
+                },
+                emphasis : {
+                    label : {
+                        show : true,
+                        formatter : "{b}\n{d}%"
+                    }
+                }
+                
+            },
+            data:[
+                {value:688, name:'耕地面积'},
+                {value:105, name:'非耕地面积'}
+            ]
+        },
+    ]
+}; 
+
+var nationoption = {
+	 title : {
+        text: '收入占比',
+    },
+      tooltip : {
+        formatter: "{b} : {c}人",
+        trigger: 'axis',
+         axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+        toolbox: {
+        show : true,
+        feature : {
+            dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    xAxis: {
+        type: 'category',
+        data: ['1000元以下','1000-2000元','2000-3000元', '3000-4000元', '5000-6000元', '6000-7000元', '7000元以上']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+        data: [120, 200, 150, 80, 70, 110, 130],
+        type: 'bar'
+    }]
+};
+
+poor.setOption(pooroption);
+religion.setOption(religionoption);
+letter.setOption(letteroption);
+land.setOption(landoption);
+nation.setOption(nationoption);
+</script>
+
+
+</body>
+</html>

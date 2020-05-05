@@ -1,0 +1,719 @@
+ <!--
+ 	(c) Copyright 2020 lu. All Rights Reserved. 
+ 	作者: 路  1270123648@qq.com
+ -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" /> 
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <script src="js/jquery-3.3.1.min.js"></script> 
+        <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/echarts.min.js"></script>
+        <script type="text/javascript" src="theme/dark.js"></script>
+   		<title></title>
+   		<style> 
+   		  html{
+		  	height: 100%;
+		  }
+		  body{
+		  	height: 100%;
+		  	background:url(img/nybj.png);
+		  	padding: 0;
+		  	margin: 0;
+		  }
+		  .header{
+		  	height: 5%;
+		  }
+		  .dropdown{
+		  	position: absolute;
+		  	left: 40px;
+		  	top: 10px;
+		  	height: 70%;
+		  }
+		 .dropdown{
+		  	width: 40%;
+		  }
+		  .text{
+		  	color: #DDD;
+		  }
+		  .dropdown-item{
+		  	text-align: center;
+		  	width: 10%;
+		  	padding: 1%;
+		  	margin: 0;
+		  	float: left;
+		  }
+		  .font{
+		  	margin-top: 10px;
+		  }
+		  .row{
+		  	padding: 0;
+		  	margin: 0;
+		  	width: 100%;
+		  	height: 60%;
+		  }
+		  .contenta{
+		  	height: 50%;
+		  	margin-top:10px;
+		  }
+		  .sex{
+		  	box-shadow: 2px 2px 10px 3px rgba(61, 72, 85, 1);
+            border-radius: 4px;
+		  	width: 100%;
+		  	height: 100%;
+		  }
+		  .sex:hover{
+         box-shadow: 2px 2px 10px 3px rgba(31, 22, 45, 1);
+         border-radius: 3px;
+		  }
+   		</style>
+	</head>
+	<body class="container-fluid">
+		<div class="header">
+			 <div class="dropdown">
+	<span class="text">数据范围</span>
+    <button type="button" class="btn btn-dark dropdown-toggle text" data-toggle="dropdown">
+      全镇
+    </button>
+    <div class="dropdown-menu dropdown-menu-right bg-secondary" id="dropdown-menu">
+      <a class="dropdown-item" href="#">杨寨村</a>
+      <a class="dropdown-item" href="#">玉王村</a>
+      <a class="dropdown-item" href="#">周庄村</a>
+       <a class="dropdown-item" href="#">周庄村</a>
+        <a class="dropdown-item" href="#">周庄村</a>
+         <a class="dropdown-item" href="#">周庄村</a>
+          <a class="dropdown-item" href="#">周庄村</a>
+           <a class="dropdown-item" href="#">周庄村</a>
+            <a class="dropdown-item" href="#">周庄村</a>
+             <a class="dropdown-item" href="#">周庄村</a>
+              <a class="dropdown-item" href="#">周庄村</a>
+               <a class="dropdown-item" href="#">周庄村</a>
+                <a class="dropdown-item" href="#">周庄村</a>
+                 <a class="dropdown-item" href="#">周庄村</a>
+                  <a class="dropdown-item" href="#">周庄村</a>
+                   <a class="dropdown-item" href="#">周庄村</a>      
+    </div>
+  </div>
+      <h4 class="font text-primary text-center">总人数<span class="text-danger">8656</span>人</h4>
+</div>
+
+<div class="row">
+	<div class="col-sm-12 col-md-5 contenta">
+		<div class="sex" id="sex"></div>
+	</div>
+	<div class="col-sm-12 col-md-3 contenta">
+		<div class="sex" id="occ"></div>
+	</div>
+	<div class="col-sm-12 col-md-4 contenta">
+		<div class="sex" id="age"></div>
+	</div>
+	
+	
+	<div class="col-sm-12 col-md-3 contenta">
+		<div class="sex" id="education"></div>
+	</div>
+	<div class="col-sm-12 col-md-3 contenta">
+		<div class="sex" id="poor"></div>
+	</div>
+	<div class="col-sm-12 col-md-3 contenta">
+		<div class="sex" id="religion"></div>
+	</div>
+	<div class="col-sm-12 col-md-3 contenta">
+		<div class="sex" id="letter"></div>
+	</div>
+	
+	
+	   <div class="col-sm-12 col-md-4 contenta">
+		<div class="sex" id="land"></div>
+      </div>
+       <div class="col-sm-12 col-md-4 contenta">
+		<div class="sex" id="people"></div>
+      </div>
+       <div class="col-sm-12 col-md-4 contenta">
+		<div class="sex" id="nation"></div>
+      </div>
+</div>
+
+
+<script>
+ var  sex= echarts.init(document.getElementById('sex'),"dark");
+  var occ= echarts.init(document.getElementById('occ'),"dark");
+    var age= echarts.init(document.getElementById('age'),"dark");
+    var education=echarts.init(document.getElementById('education'),"dark");
+     var poor=echarts.init(document.getElementById('poor'),"dark");
+     var religion=echarts.init(document.getElementById('religion'),"dark");
+      var letter=echarts.init(document.getElementById('letter'),"dark");
+      var land=echarts.init(document.getElementById('land'),"dark");
+      var people=echarts.init(document.getElementById('people'),"dark");
+      var nation=echarts.init(document.getElementById('nation'),"dark");
+	var sexoption = {
+    tooltip: {
+        trigger: 'item',
+        formatter: "{b}:{c}({d}%)"
+    },
+    series: [
+        {   
+        	name:'男女比例',
+            type: 'pie',
+            radius: "76%",
+            center : ['15%', '50%'],
+            label: {
+              normal: {
+                position: 'inner',
+                formatter: '{b}\n{d}%\n{c}人',
+                textStyle: {
+                    color: '#fff',
+                    fontWeight: 'bold',
+                    fontSize: 14
+                }
+              }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            avoidLabelOverlap: false,
+            data: [{
+                    value: 225,
+                    name: '男性',
+                },
+                {
+                    value: 300,
+                    name: '女性',
+                }
+            ]
+        },
+        {
+        	 name:'外出比例',
+            type: 'pie',
+            radius: "76%",
+            center : ['50%', '50%'],
+            label: {
+              normal: {
+                position: 'inner',
+                formatter: '{b}\n{d}%\n{c}人',
+                textStyle: {
+                    color: '#fff',
+                    fontWeight: 'bold',
+                    fontSize: 14
+                }
+              }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            avoidLabelOverlap: false,
+            data: [{
+                    value: 889,
+                    name: '在家',
+                },
+                {
+                    value: 622,
+                    name: '外出',
+                }
+            ]
+        },
+             {
+        	 name:'政治面貌',
+            type: 'pie',
+            radius: "76%",
+            center : ['85%', '50%'],
+            avoidLabelOverlap: false,
+            label: {
+              normal: {
+                position: 'inner',
+                formatter: '{b}\n{d}%\n{c}人',
+                textStyle: {
+                    color: '#fff',
+                    fontWeight: 'bold',
+                    fontSize: 14
+                }
+              }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data: [{
+                    value: 66,
+                    name: '群众',
+                },
+                {
+                    value: 5,
+                    name: '党员',
+                },
+                {
+                    value: 6,
+                    name: '团员',
+                },
+                {
+                    value: 5,
+                    name: '其他',
+                }
+            ]
+        }
+    ]
+};
+
+
+
+ var occoption = {
+ 	  title : {
+        text: '职业比例',
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    series: [
+        {
+            name:'职业类型分布',
+            type:'pie',
+            label: {
+            },
+            data:[
+                {value:3350, name:'务农'},
+                {value:310, name:'上班'},
+                {value:23, name:'电子商务'},
+                {value:13, name:'自主创业'},
+                {value:148, name:'商铺'},
+                {value:251, name:'养殖业'},
+                {value:2, name:'修理'},
+                {value:2001, name:'学生'},
+                {value:251, name:'教师'},
+            ]
+        }
+    ]
+};
+
+// 年龄 option 配置 
+var ageoption= {
+    title : {
+        text: '年龄统计',
+    },
+    tooltip : {
+        trigger: 'axis',
+         axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        show : true,
+        feature : {
+
+            magicType : {show: true, type: ['line', 'bar']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    xAxis : [
+        {
+        	 type: 'category',
+        	   show: false,
+            data : ['0-2岁','3-5岁','5-10岁','11-15岁','16-20岁','21-25岁','26-30岁','30-35岁','36-40岁','41-50岁','51-60岁','61-80岁'],
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value',
+              show: false,
+        }
+    ], 
+    series : [
+        {
+            name:'年龄',
+            type:'bar',
+            barWidth: '80%',
+            itemStyle: {
+                normal: {
+                    label: {
+                        show: true,
+                        position: 'top',
+                        formatter: '{b}\n{c}'
+                    }
+                }
+            },
+            data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+        },
+      
+    ]
+};
+        //学历比例
+  var educationoption = {
+  	  title : {
+        text: '学历比例',
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'right',
+        data:['无学历','小学','初中','高中','中专',"大专","本科","本科以上"]
+    },
+    series: [
+        {
+            name:'学历比例',
+            type:'pie',
+            radius: ['50%', '85%'],
+            center : ['45%', '50%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data:[
+                {value:335, name:'无学历'},
+                {value:310, name:'小学'},
+                {value:234, name:'初中'},
+                {value:1548, name:'高中'},
+                {value:135, name:'中专'},    
+                {value:1548, name:'大专'},
+                {value:1548, name:'本科'},
+                {value:1548, name:'本科以上'},
+            ]
+        }
+    ]
+};
+
+
+
+
+//  贫困比例
+ var  pooroption = {
+ 	  title : {
+        text: '贫困统计',
+    },
+    tooltip : {
+        show: true,
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        x : 'center',
+        data:['非贫困','贫困'],
+    },
+    toolbox: {
+        show : true,
+        feature : {
+         //   mark : {show: true},    //辅助线
+            dataView : {show: true, readOnly: false},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    series : [
+        {
+            name:'贫困类型',
+            type:'pie',
+            center : ['60%', "55%"],
+            radius : [0, 50],
+            itemStyle : {
+                normal : {
+                    label : {
+                        position : 'inner',
+                  formatter : "{b}\n{d}%"
+                    },
+                    labelLine : {
+                        show : false
+                    }
+                },
+                emphasis : {
+                    label : {
+                        show : true,
+                        formatter : "{b}\n{d}%"
+                    }
+                }
+                
+            },
+            data:[
+                {value:6888, name:'非贫困'},
+                {value:15, name:'贫困'}
+            ]
+        },
+        {
+            name:'贫困类型',
+            type:'pie',
+            center : ['60%',"55%"],
+            radius : [60, 100],
+            data:[
+                {value:335, name:'低保户'},
+                {value:310, name:'五保户'},
+                {value:234, name:'贫困户'},
+            ]
+        },
+       
+    ]
+}; 
+
+
+var religionoption = {
+	  title : {
+        text: '宗教比例',
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        x: 'right',
+        data:['无','佛教','基督教','道教','伊斯兰教',"天主教"]
+    },
+    series: [
+        {
+            name:'访问来源',
+            type:'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data:[
+                {value:335, name:'无'},
+                {value:310, name:'道教'},
+                {value:234, name:'佛教'},
+                {value:135, name:'伊斯兰教'},
+                {value:158, name:'天主教'},
+                {value:135, name:'基督教'},
+            ]
+        }
+    ]
+};
+
+
+var itemStyle = {
+    normal: {
+        opacity: 0.7,
+        borderWidth: 3,
+    }
+};
+var letteroption = {
+
+    title: {
+        text: '信访分析',
+        subtext:"信访人数:6人"
+    },
+    series: [{
+        name: 'pie',
+        type: 'pie',
+        selectedMode: 'single',
+        selectedOffset: 30,
+        clockwise: true,
+
+        labelLine: {
+            normal: {
+                lineStyle: {
+                    color: '#235894'
+                }
+            }
+        },
+        data:[
+            {value:335, name:'环境保护'},
+            {value:310, name:'建设规划'},
+            {value:234, name:'社会保障'},
+            {value:135, name:'维权争议'},
+        ],
+        itemStyle: itemStyle
+    }]
+};
+
+
+
+
+var  landoption = {
+ 	  title : {
+        text: '耕地面积占比',
+        subtext:"总面积:9062公顷"
+    },
+    tooltip : {
+        show: true,
+        formatter: "{a} <br/>{b} : {c} 公顷 ({d}%)"
+    },
+    legend: {
+        left : 'center',
+        data:['耕地','非耕地'],
+    },
+    toolbox: {
+        show : true,
+        feature : {
+         //   mark : {show: true},    //辅助线
+            dataView : {show: true, readOnly: false},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    series : [
+        {
+            name:'贫困类型',
+            type:'pie',
+            radius : ["0%", "90%"],
+            itemStyle : {
+                normal : {
+                    label : {
+                        position : 'inner',
+                  formatter : "{b}\n{d}%"
+                    },
+                    labelLine : {
+                        show : false
+                    }
+                },
+                emphasis : {
+                    label : {
+                        show : true,
+                        formatter : "{b}\n{d}%"
+                    }
+                }
+                
+            },
+            data:[
+                {value:688, name:'耕地面积'},
+                {value:105, name:'非耕地面积'}
+            ]
+        },
+    ]
+}; 
+
+
+var peopleoption = {
+    title : {
+        text: '人口比例',
+        subtext: '',
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+    	  type: 'scroll',
+        orient: 'vertical',
+        left: 'right',
+        data: ['**村','qq村','ww村','ee村','rr村','tt村','yy村','uu村','ii村','oo村','pp村']
+    },
+    series : [
+        {
+            name: '访问来源',
+            type: 'pie',
+            radius : '55%',
+            center: ['50%', '60%'],
+            data:[
+                {value:335, name:'**村'},
+                {value:310, name:'qq村'},
+                {value:234, name:'ww村'},
+                {value:135, name:'ee村'},
+                {value:1548, name:'rr村'},
+                {value:1548, name:'tt村'},
+                {value:1548, name:'yy村'},
+                {value:1548, name:'uu村'},
+                {value:1548, name:'ii村'},
+                {value:1548, name:'oo村'},
+                {value:1548, name:'pp村'},
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+
+
+var nationoption = {
+	 title : {
+        text: '收入占比',
+    },
+      tooltip : {
+        trigger: 'axis',
+         axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+        toolbox: {
+        show : true,
+        feature : {
+            dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    xAxis: {
+        type: 'category',
+        data: ['1000以下','1000-2000','2000-3000', '3000-4000', '5000-6000', '6000-7000', '7000以上']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+        data: [120, 200, 150, 80, 70, 110, 130],
+        type: 'bar'
+    }]
+};
+
+
+
+sex.setOption(sexoption);
+occ.setOption(occoption);
+age.setOption(ageoption);
+education.setOption(educationoption);
+poor.setOption(pooroption);
+religion.setOption(religionoption);
+letter.setOption(letteroption);
+land.setOption(landoption);
+people.setOption(peopleoption);
+nation.setOption(nationoption);
+</script>
+	</body>
+</html>

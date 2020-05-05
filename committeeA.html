@@ -1,0 +1,446 @@
+ <!--
+ 	(c) Copyright 2020 lu. All Rights Reserved. 
+ 	作者: 路  1270123648@qq.com
+ -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+		<link rel="stylesheet" href="css/pager.css" />
+		<script src="js/pager.js">
+		</script>
+		<title></title>
+		<style type="text/css">
+			html {
+				height: 100%;
+			}
+			
+			body {
+				height: 100%;
+				background-color: #DDD;
+				padding: 0;
+				margin: 0;
+			}
+			
+			.lu-a {
+				float: left;
+				width: 20%;
+				min-width: 100px;
+				height: 100%;
+				padding: 30px 0px;
+			}
+			
+			.lu-a>div {
+				width: 100%;
+				height: 100%;
+				border-radius: 5px;
+				background-color: #FFFFFD;
+				position: relative;
+			}
+			
+			.lu-a img {
+				width: 100%;
+				height: 30%;
+				border-radius: 5px;
+			}
+			
+			.font {
+				font-family: "宋体";
+				padding: 20px;
+				padding-bottom: 0;
+			}
+			
+			.wz {
+				font-size: 12px;
+			}
+			
+			.hr {
+				width: 85%;
+				height: 1px;
+				background-color: #DDD;
+			}
+			
+			.text {
+				height: 50px;
+				line-height: 50px;
+				font-size: 12px;
+			}
+			
+			.jianjie {
+				height: 200px;
+			}
+			
+			.xiugai {
+				position: absolute;
+				bottom: 5px;
+				right: 5px;
+				width: 100%;
+				color: #007BFF;
+				font-weight: 800;
+				font-size: 13px;
+				cursor: pointer;
+			}
+			
+			.lu-b {
+				width: 80%;
+				min-width: 200px;
+				height: 100%;
+				padding: 30px;
+			}
+			
+			.lu-b>div {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				border-radius: 5px;
+				background-color: #FFFFFD;
+				padding: 10px;
+			}
+			
+			.lu-c {
+				height: 40%;
+				width: 100%;
+			}
+			
+			.lb {
+				width: 100%;
+				background-color: #FFFFFD;
+				height: 90%;
+				overflow-y: auto;
+			}
+			
+			.lu-d {
+				width: 100%;
+				height: 50%;
+			}
+			
+			.wc {
+				color: red;
+			}
+			
+			.modal-body {
+				padding: 10%;
+			}
+			
+			.modal-body div {
+				padding-bottom: 3%;
+			}
+			
+			#newWindow {
+				position: relative;
+			}
+			.con{
+				position: absolute;
+				bottom: 0;
+			}
+			#image{
+				width: 200px;
+			}
+		</style>
+	</head>
+
+	<body class="container-fluid">
+
+		<!--    左部分   -->
+		<div class="lu-a">
+			<div>
+				<img src="http://i3.cqnews.net/xfsc/attachement/jpg/site82/20110904/b8ac6f4dab850fcd65be2d.jpg" />
+				<div class="font">
+					<h5 id="text">**村委会 </h5>
+					<div class="wz text-right">镜湖中路</div>
+				</div>
+				<div class="hr mx-auto"></div>
+				<div class="text text-center">
+					<span class="text-danger">0</span> 个组 <span class="text-danger">668</span> 个居民
+				</div>
+				<div class="hr mx-auto"></div>
+				<div class="text w-75 mx-auto">
+					<span class="float-left font-weight-light text-muted">负责人:</span> <span class="float-right">刘--</span>
+				</div>
+				<div class="hr mx-auto"></div>
+				<div class="text w-75 mx-auto">
+					<span class="float-left font-weight-light text-muted">管辖范围:</span> <span class="float-right">998 平方米</span>
+				</div>
+				<div class="hr mx-auto"></div>
+				<div class="text w-75 mx-auto jianjie">
+					<span class="font-weight-light text-muted">简介:</span> **村 ********* -**************
+				</div>
+				<!-- 
+				 <div class="xiugai text-right">修改村委会信息</div>
+				-->
+				<button class="btn btn-info w-100 mx-auto con" data-toggle="modal" data-target="#myczModal">修改村委会信息</button>
+				<!-- 模态框 -->
+				<div class="modal fade" id="myczModal">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<form action="" method="post" enctype="multipart/form-data">
+								<!-- 模态框头部 -->
+								<div class="modal-header">
+									<h4 class="modal-title text-center w-100">修改村委会信息</h4>
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+
+								<!-- 模态框主体 -->
+								<div class="modal-body">
+									<div class="form-inline">
+										<label for="name">负责:</label>
+										<input type="text" class="form-control" id="name" name="name" maxlength="15" placeholder="name" />
+										<label for="name" class="wc"></label>
+									</div>
+									<div class="form-inline top">
+										<label for="Range">辖区:</label>
+										<input type="number" class="form-control" id="Range" name="Range" placeholder="范围" />
+										<span class="input-group-text">㎡</span>
+										<label for="Range" class="wc"></label>
+									</div>
+									<div class="form-inline top input-group">
+										<label for="brief">简介:</label>
+										<textarea class="form-control" rows="5" id="brief" placeholder="简介"></textarea>
+										<div class="input-group-append">
+											<label for="brief" class="wc"></label>
+										</div>
+									</div>
+									<div class="form-inline top">
+										<label for="image">图片:</label>
+										<input type="file" class="form-control" id="image" name="image" placeholder="image" />
+										<label for="image" class="wc"></label>
+									</div>
+									<div class="form-inline top">
+										<label for="point">位置:</label>
+										<a id="newWindow" href="javascript:openNew()">
+											<input type="text" class="form-control" readonly unselectable="on" id="point" name="point" placeholder="point" />
+										</a>
+										<label for="point" class="wc"></label>
+									</div>
+								</div>
+								<!-- 模态框底部 -->
+								<div class="modal-footer">
+									<button type="button" class="btn btn-success" id="qr">确定</button>
+									<button type="button" class="btn btn-danger" data-dismiss="modal">关闭</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--    右 部分  -->
+		<div class="lu-b float-left ">
+			<div class="container-fluid">
+				<!--  右上表  -->
+				<div class="lu-c">
+					<button type="button" class="btn btn-outline-dark fa fa-plus-square" data-toggle="modal" data-target="#myModal">添加小组</button>
+					<div class="ssk input-group mb-3 input-group-sm w-25 float-right">
+						<input type="text" class="form-control" placeholder="输入名字">
+						<div class="input-group-append">
+							<button class="btn btn-success" type="submit">搜素</button>
+						</div>
+					</div>
+					<div class="lb">
+						<table class="table table-striped table-hover  table-bordered text-center">
+							<thead class="thead-dark">
+								<tr>
+									<th>组名</th>
+									<th>负责人</th>
+									<th>联系电话</th>
+									<th>人数</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>一组</td>
+									<td>王**</td>
+									<td>1568248955</td>
+									<td>644</td>
+								</tr>
+								<tr>
+									<td>二组</td>
+									<td>王**</td>
+									<td>1568248955</td>
+									<td>644</td>
+								</tr>
+								<tr>
+									<td>三组</td>
+									<td>王**</td>
+									<td>1568248955</td>
+									<td>644</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<!--   右 下表  -->
+				<div class="lu-d">
+					<button type="button" class="btn btn-outline-dark fa fa-plus-square w-25 float-left" data-toggle="modal" data-target="#myModal">添加村民</button>
+					<div class="text-center w-50 float-left">村民列表</div>
+					<div class="ssk input-group mb-3 input-group-sm w-25 float-right">
+						<input type="text" class="form-control" placeholder="输入名字">
+						<div class="input-group-append">
+							<button class="btn btn-success" type="submit">搜素</button>
+						</div>
+					</div>
+					<div class="lb">
+						<table class="table table-striped table-hover  table-bordered text-center">
+							<thead class="thead-dark">
+								<tr>
+									<th>名字</th>
+									<th>性别</th>
+									<th>联系电话</th>
+									<th>年龄</th>
+									<th>组别</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>刘**</td>
+									<td>男</td>
+									<td>1568248955</td>
+									<td>24</td>
+									<td>一</td>
+								</tr>
+								<tr>
+									<td>刘**</td>
+									<td>男</td>
+									<td>1568248955</td>
+									<td>24</td>
+									<td>一</td>
+								</tr>
+								<tr>
+									<td>刘**</td>
+									<td>男</td>
+									<td>1568248955</td>
+									<td>24</td>
+									<td>一</td>
+								</tr>
+								<tr>
+									<td>刘**</td>
+									<td>男</td>
+									<td>1568248955</td>
+									<td>24</td>
+									<td>一</td>
+								</tr>
+								<tr>
+									<td>刘**</td>
+									<td>男</td>
+									<td>1568248955</td>
+									<td>24</td>
+									<td>一</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!--  分页   -->
+					<div class="page float-right">
+						<ul class="pagination" id="page1"></ul>
+						<div class="pageJump">
+							<span>跳转到</span>
+							<input type="text" style="width: 50px;" />
+							<span>页</span>
+							<button type="button" class="button">确定</button>
+						</div>
+					</div>
+					<!--  分页结束   -->
+
+				</div>
+
+			</div>
+
+		</div>
+		<script>
+			Page({
+				num: 2, //页码数
+				startnum: 1, //指定页码
+				elem: $('#page1'), //指定的元素
+				callback: function(n) { //回调函数
+					location.href = "user.html/" + n;
+				}
+			});
+
+			function sele(point) {
+				$("#point").val(point);
+			}
+			function openNew() {
+				window.open('selectMap.html', 'newwindow', 'height=700,width=1000,top=100,left=300,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no')
+			}
+
+			function checkName() {
+				if($('#name').val().length == 0 || $("#name").val().trim() == "") {
+					$('#name').parent().find(".wc").addClass("fa fa-close").text("不能为空");
+				} else if($("#name").val().length > 20) {
+					$('#name').parent().find(".wc").addClass("fa fa-close").text("名字过长");
+				} else {
+					$('#name').parent().find(".wc").removeClass("fa fa-close").text("");
+				}
+			}
+
+			function checkRange() {
+				if($("#Range").val() == "" || $("#Range").val().trim() == "") {
+					$("#Range").parent().find(".wc").addClass("fa fa-close").text("不能为空");
+				} else if($("#Range").val() < 0) {
+					$("#Range").parent().find(".wc").addClass("fa fa-close").text("不能小于0");
+				} else {
+					$("#Range").parent().find(".wc").removeClass("fa fa-close").text("");
+				}
+			}
+
+			function checkBrief() {
+				if($("#brief").val().length > 300) {
+					$("#brief").parent().find(".wc").addClass("fa fa-close").text("过长");
+				} else if($("#brief").val().length == 0 || $("#brief").val().trim() == "") {
+					$("#brief").parent().find(".wc").addClass("fa fa-close").text("不能为空");
+				} else {
+					$("#brief").parent().find(".wc").removeClass("fa fa-close").text("");
+				}
+			}
+
+			function checkImage() {
+				if($("#image").val().trim() == "") {
+					$('#image').parent().find(".wc").addClass("fa fa-close").text("不能为空");
+				} else {
+					$('#image').parent().find(".wc").removeClass("fa fa-close").text("");
+				}
+			}
+			
+			function checkPoint() {
+				if($("#point").val().trim() == "") {
+					$('#point').parent().parent().find(".wc").addClass("fa fa-close").text("请选点");
+				} else {
+					$('#point').parent().parent().find(".wc").removeClass("fa fa-close").text("");
+				}
+			}
+			$("#name").blur(checkName);
+			$("#Range").blur(checkRange);
+			$("#brief").blur(checkBrief);
+			$("#image").blur(checkImage);
+			$("#point").blur(checkPoint);
+			$("#qr").click(function() {
+				checkName();
+				checkRange();
+				checkBrief();
+				checkImage();
+				checkPoint();
+				var x = 0;
+				$(".wc").each(function(index) {
+					if($(".wc:eq(" + [index] + ")").text() != "") {
+						x++;
+					}
+				})
+
+				if(x == 0) {
+					$("form").submit();
+				} else {
+					alert("填写的有误,请确认后 提交");
+				}
+
+			})
+		</script>
+	</body>
+
+</html>

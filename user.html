@@ -1,0 +1,290 @@
+ <!--
+ 	(c) Copyright 2020 lu. All Rights Reserved. 
+ 	作者: 路  1270123648@qq.com
+ -->
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="css/pager.css" />
+		<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+		<script src="js/pager.js">
+		</script>
+		<title></title>
+		<style type="text/css">
+			html {
+				height: 100%;
+			}
+			
+			body {
+				height: 100%;
+				background-color: #DDD;
+				padding: 0;
+				margin: 0;
+				padding-top: 10px;
+			}
+			
+			.lu {
+				height: 99%;
+				padding-top: 10px;
+				background-color: #FFFFFD;
+				border-radius: 5px;
+			}
+			
+			h5 {
+				margin-left: 15px;
+				margin-right: 20px;
+			}
+			
+			.ssk {
+				margin-right: 10px;
+			}
+			
+			.center {
+				height: 80%;
+				overflow-y: auto;
+			}
+			
+			.bottom {
+				position: absolute;
+				bottom: 2%;
+			}
+			
+			.editt {
+				display: inline;
+				width: 50%;
+			}
+			
+			.hide {
+				display: none;
+			}
+			
+			.wc {
+				color: red;
+			}
+			
+			.modal-body {
+				padding: 10%;
+			}
+			
+			.modal-body div {
+				padding-bottom: 3%;
+			}
+		</style>
+	</head>
+
+	<body class="container-fluid">
+		<div class="lu">
+			<div class="lu-a">
+				<h5 class="font text-dark float-left font-weight-bold">用户管理 </h5>
+				<button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#myModal">添加用户</button>
+				<!-- 模态框 -->
+				<div class="modal fade" id="myModal">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<form action="" method="post">
+								<!-- 模态框头部 -->
+								<div class="modal-header">
+									<h4 class="modal-title text-center w-100">添加用户</h4>
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+
+								<!-- 模态框主体 -->
+								<div class="modal-body">
+									<div class="form-inline">
+										<label for="name">用户:</label>
+										<input type="text" class="form-control" id="name" name="name" maxlength="15" placeholder="name" />
+										<label for="name" class="wc"></label>
+									</div>
+									<div class="form-inline top">
+										<label for="password">密码:</label>
+										<input type="password" class="form-control" id="password" maxlength="16" name="password" placeholder="密码" />
+										<label for="password" class="wc"></label>
+									</div>
+									<div class="form-inline top">
+										<label for="authority">权限:</label>
+										<select class="form-control" id="authority" name="authority">
+											<option value="A">A</option>
+											<option value="B">B</option>
+											<option value="C" selected="selected">C</option>
+										</select>
+										<label for="authority" class="wc"></label>
+									</div>
+								</div>
+
+								<!-- 模态框底部 -->
+								<div class="modal-footer">
+									<button type="button" class="btn btn-success" id="qr">确定</button>
+									<button type="button" class="btn btn-danger" data-dismiss="modal">关闭</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="ssk input-group mb-3 input-group-sm w-25 float-right">
+					<input type="text" class="form-control" placeholder="输入名字">
+					<div class="input-group-append">
+						<button class="btn btn-success" type="submit">搜素</button>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="center">
+				<table class="table table-striped table-hover text-center">
+					<thead class="thead-dark">
+						<tr>
+							<th>用 户</th>
+							<th>密 码</th>
+							<th>权限级别</th>
+							<th>备注信息</th>
+							<th>添加日期</th>
+							<th>编辑</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>qwezxc</td>
+							<td class="edit mima">136182</td>
+							<td class="edit jibie">B</td>
+							<td class="edit beizhu">管理员</td>
+							<td>2017-6-8</td>
+							<td>
+								<div class="xs">
+									<input type="button" id="" class="btn btn-success modify" value="修改" />
+									<input type="button" id="" class="btn btn-dark delete" value="删除" />
+								</div>
+								<div class="hide">
+									<input type="button" id="" class="btn btn-success queren" value="确认" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>qwezxc</td>
+							<td class="edit mima">136182</td>
+							<td class="edit jibie">B</td>
+							<td class="edit beizhu">镇长</td>
+							<td>2017-6-8</td>
+							<td>
+								<div class="xs">
+									<input type="button" id="" class="btn btn-success modify" value="修改" />
+									<input type="button" id="" class="btn btn-dark delete" value="删除" />
+								</div>
+								<div class="hide">
+									<input type="button" id="" class="btn btn-success queren" value="确认" />
+
+								</div>
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+
+			</div>
+
+			<!--  分页  -->
+			<div class="page float-right">
+				<ul class="pagination" id="page1">
+				</ul>
+				<div class="pageJump">
+					<span>跳转到</span>
+					<input type="text" style="width: 50px;" />
+					<span>页</span>
+					<button type="button" class="button">确定</button>
+				</div>
+			</div>
+
+			<!--  权限级别介绍  -->
+			<div class="bottom text-danger">
+				&nbsp;&nbsp;&nbsp;&nbsp; * A级权限 可以 修改-查看 所有数据&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;* B级权限 可以 查看 所有数据 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; * C级权限 查看 部分数据&nbsp;
+			</div>
+		</div>
+		<script>
+			Page({
+				num: 2, //页码数
+				startnum: 1, //指定页码
+				elem: $('#page1'), //指定的元素 
+				callback: function(n) { //回调函数
+					location.href = "user.html/" + n;
+				}
+			});
+
+			function checkName() {
+				var pattern = /^[\u4E00-\u9FA5]{1,15}$/;
+				if($.trim($('#name').val()).length == 0) {
+					$('#name').parent().find(".wc").addClass("fa fa-close").text("名称没有输入");
+				} else if(pattern.test($.trim($('#name').val())) == false) {
+					$('#name').parent().find(".wc").addClass("fa fa-close").text("名称输入错误");
+				} else {
+					$('#name').parent().find(".wc").removeClass("fa fa-close").text("");
+				}
+			}
+
+			function checkPassword() {
+				if($('#password').val().length == 0 || $("#password").val().trim() == "") {
+					$('#password').parent().find(".wc").addClass("fa fa-close").text("不能为空");
+				} else {
+					$('#password').parent().find(".wc").removeClass("fa fa-close").text("");
+				}
+			}
+			$("#name").blur(checkName);
+			$("#password").blur(checkPassword);
+			$("#qr").click(function() {
+				checkName();
+				checkPassword();
+				var x = 0;
+				$(".wc").each(function(index) {
+					if($(".wc:eq(" + [index] + ")").text() != "") {
+						x++;
+					}
+				})
+				if(x == 0) {
+					$("form").submit();
+				} else {
+					alert("填写的有误,请确认后 提交");
+				}
+
+			})
+			//删除
+			$(".delete").click(function() {
+				var r = confirm("删除后 此用户将不能登录 请确认操作!");
+				if(r == true) {
+					$(this).parents("tr").remove();
+				}
+			});
+
+			//修改
+			$(".modify").click(function() {
+				$(this).parent().siblings(".hide").removeClass("hide");
+				$(this).parent().attr("class", "hide");
+				var $mima = $(this).parents().prevAll(".mima"),
+					$jibie = $(this).parents().prevAll(".jibie"),
+					$beizhu = $(this).parents().prevAll(".beizhu");
+				var mima = $mima.text(),
+					jibie = $jibie.text(),
+					beizhu = $beizhu.text();
+
+				$mima.html(' <input  class="editt form-control mm"  type="text" value="' + mima + '"/>');
+				$jibie.html('<select  class="editt form-control jb"> <option>' + jibie + '</option><option>A</option><option>B</option><option>C</option></select>');
+				$beizhu.html('<input  class="editt form-control bz"  type="text" value="' + beizhu + '"/> ');
+			})
+
+			// 确认
+			$(".queren").click(function() {
+				$(this).parent().siblings(".hide").removeClass("hide");
+				$(this).parent().attr("class", "hide");
+				var $mima = $(this).parents().prevAll(".mima"),
+					$jibie = $(this).parents().prevAll(".jibie"),
+					$beizhu = $(this).parents().prevAll(".beizhu");
+				$mima.html($mima.children().val());
+				$jibie.html($jibie.children().val());
+				$beizhu.html($beizhu.children().val());
+			})
+		</script>
+	</body>
+
+</html>

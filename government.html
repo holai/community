@@ -1,0 +1,451 @@
+ <!--
+ 	(c) Copyright 2020 lu. All Rights Reserved. 
+ 	作者: 路  1270123648@qq.com
+ -->
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/echarts.min.js"></script>
+		<script type="text/javascript" src="theme/dark.js"></script>
+		<link rel="stylesheet" href="css/pager.css" />
+		<script src="js/pager.js">
+		</script>
+		<title></title>
+		<style type="text/css">
+			html {
+				height: 100%;
+			}
+			
+			body {
+				height: 100%;
+				background-color: #DDD;
+				padding: 0;
+				margin: 0;
+				padding-top: 10px;
+			}
+			
+			.font,
+			.ssk {
+				margin-left: 10px;
+				margin-right: 10px;
+			}
+			
+			.center {
+				height: 50%;
+				overflow-y: auto;
+			}
+			
+			.tupiao {
+				width: 100%;
+				height: 40%;
+			}
+			
+			.a {
+				height: 100%;
+			}
+			
+			.bor {
+				border-bottom: 2px #000 solid
+			}
+			
+			.top {
+				margin-top: 10px;
+			}
+			
+			.wc {
+				font-size: 12px;
+				color: red;
+				margin-left: 20px;
+			}
+			
+			.margin {
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+
+	<body class="container-fluid">
+		<!-- 头部 -->
+		<div class="lu-a">
+			<h5 class="font text-dark float-left font-weight-bold">镇政府信息</h5>
+			<button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#myModal">添加人员</button>
+			<div class="ssk input-group mb-3 input-group-sm w-25 float-right">
+				<input type="text" class="form-control" placeholder="输入名字">
+				<div class="input-group-append">
+					<button class="btn btn-success" type="submit">搜素</button>
+				</div>
+			</div>
+		</div>
+		<!-- 清除 浮动 -->
+		<div class="clearfix"></div>
+		<div class="center">
+			<table class="table table-striped table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th>姓名</th>
+						<th>性别</th>
+						<th>年龄</th>
+						<th>职位</th>
+						<th>科室</th>
+						<th>电话</th>
+						<th>住址</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>李**</td>
+						<td>男</td>
+						<td>34</td>
+						<td>镇长</td>
+						<td>政府</td>
+						<td>135888877866</td>
+						<td>风穴寺广成东路18号</td>
+					</tr>
+					<tr>
+						<td>王**</td>
+						<td>男</td>
+						<td>34</td>
+						<td>副镇长</td>
+						<td>财政</td>
+						<td>135888877866</td>
+						<td>风穴寺广成东路18号</td>
+					</tr>
+					<tr>
+						<td>李**</td>
+						<td>男</td>
+						<td>34</td>
+						<td>委员</td>
+						<td>环境</td>
+						<td>135888877866</td>
+						<td>风穴寺广成东路18号</td>
+					</tr>
+					<tr>
+						<td>王**</td>
+						<td>男</td>
+						<td>34</td>
+						<td>成员</td>
+						<td>建设</td>
+						<td>135888877866</td>
+						<td>风穴寺广成东路18号</td>
+					</tr>
+					<tr>
+						<td>李**</td>
+						<td>男</td>
+						<td>34</td>
+						<td>成员</td>
+						<td>信访办</td>
+						<td>135888877866</td>
+						<td>风穴寺广成东路18号</td>
+					</tr>
+					<tr>
+						<td>王**</td>
+						<td>男</td>
+						<td>34</td>
+						<td>成员</td>
+						<td>财政</td>
+						<td>135888877866</td>
+						<td>风穴寺广成东路18号</td>
+					</tr>
+					<tr>
+						<td>李**</td>
+						<td>男</td>
+						<td>34</td>
+						<td>成员</td>
+						<td>财政</td>
+						<td>135888877866</td>
+						<td>风穴寺广成东路18号</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+		<!--  分页  -->
+		<div class="page float-right">
+			<ul class="pagination" id="page1"></ul>
+			<div class="pageJump">
+				<span>跳转到</span>
+				<input type="text" style="width: 50px;" />
+				<span>页</span>
+				<button type="button" class="button">确定</button>
+			</div>
+		</div>
+
+		<div class="tupiao row">
+			<div class="col-sm-12 col-md-6 a" id="zhanbi"></div>
+			<div class="col-sm-12 col-md-6 a" id="zhanb">
+				<h3 class="bor">领导分工</h3>
+				<div>
+					<div>　镇　长：俞玉根　　主持镇政府全面工作，分管规划、财经、审计、人事、武装、依法行政、档案、保密、机要、地方史志、合作交流、信息化、外事、建议提案办理、应急管理、机关后勤工作。</div>
+				
+					<div>　　副镇长：陈宝初　　分管农业、林业、绿化、水利、水务、村庄改造、防汛抗台、农产品安全监管、双学双比、旅游、农村集体资产改革工作，协管依法行政、档案、保密、机要、地方史志、合作交流、信息化、信息公开、外事、建议提案办理、应急管理、机关后勤工作。</div>
+				
+					<div>　副镇长：胡国军　　分管工业、商业、民营经济、安全生产、环保、统计、集体资产管理工作，协管财经、审计工作，联系市场监管、税务、金融、电力、海关、村镇建设和管理、建筑安全、土地、给排水、交通、民防、动迁、拆违、住房、建设用地减量工作，协管规划工作，联系邮政、电信、交警、规土、房管。</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 模态框 -->
+		<div class="modal fade" id="myModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content text-center">
+					<form action="" method="post">
+						<!-- 模态框头部 -->
+						<div class="modal-header">
+							<h4 class="w-100 modal-title">添加人员</h4>
+						</div>
+
+						<!-- 模态框主体 -->
+						<div class="modal-body">
+							<div class="form-inline">
+								<label for="name">姓名:</label>
+								<input type="text" class="form-control" id="name" name="name" maxlength="4" placeholder="name">
+								<label for="name" class="wc"></label>
+							</div>
+							<div class="form-inline top">
+								<label for="sex">性别:</label>
+								<select class="form-control" name="sex" id="sex">
+									<option value="men">男</option>
+									<option value="women">女</option>
+								</select>
+							</div>
+							<div class="form-inline top">
+								<label for="age">年龄:</label>
+								<input type="number" class="form-control" id="age" name="age" placeholder="年龄">
+								<label for="age" class="wc"></label>
+							</div>
+							<div class="form-inline top">
+								<label for="zw">职位:</label>
+								<input type="text" class="form-control" id="zw" name="zw" maxlength="6" placeholder="现在职位">
+								<label for="zw" class="wc"></label>
+							</div>
+							<div class="form-inline top">
+								<label for="ks">科室:</label>
+								<input type="text" class="form-control" id="ks" name="ks" maxlength="6" placeholder="所在科室">
+								<label for="ks" class="wc"></label>
+							</div>
+							<div class="form-inline top">
+								<label for="phone">电话:</label>
+								<input type="number" class="form-control" id="phone" name="phone" placeholder="联系电话">
+								<label for="phone" class="wc"></label>
+							</div>
+							<div class="form-inline top">
+								<label for="address">地址:</label>
+								<input type="text" class="form-control" id="address" placeholder="所在地址">
+								<label for="address" class="wc"></label>
+							</div>
+
+						</div>
+
+						<!-- 模态框底部 -->
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" id="qr">确定</button>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+
+		<script>
+			// 分页 script
+			Page({
+				num: 2, //页码数
+				startnum: 1, //指定页码
+				elem: $('#page1'), //指定的元素
+				callback: function(n) { //回调函数
+					location.href = "user.html/" + n;
+				}
+			});
+			var zhanbi = echarts.init(document.getElementById('zhanbi'), "dark");
+
+			var zhanbioption = {
+				title: {
+					text: '镇政府各科室',
+					x: 'center',
+					textStyle: {
+						color: "#FFF"
+					},
+				},
+				tooltip: {
+					trigger: 'item',
+					formatter: "{a} <br/>{b}: {c}人 ({d}%)",
+
+				},
+				legend: {
+					orient: 'vertical',
+					x: 'left',
+					data: ['财务科', '环境科', '建设科', '信访办'],
+					textStyle: {
+						color: "#000"
+					},
+				},
+				series: [{
+					name: '科室',
+					type: 'pie',
+					radius: ['0%', '50%'],
+					label: {
+						normal: {
+							formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}人 {per|{d}%}  ',
+							backgroundColor: '#334455',
+							borderColor: '#aaa',
+							borderWidth: 1,
+							borderRadius: 4,
+							shadowBlur: 3,
+							shadowOffsetX: 2,
+							shadowOffsetY: 2,
+							shadowColor: '#999',
+							padding: [0, 7],
+							rich: {
+								a: {
+									color: '#999',
+									lineHeight: 22,
+									align: 'center'
+								},
+								hr: {
+									borderColor: '#aaa',
+									width: '100%',
+									borderWidth: 0.5,
+									height: 0
+								},
+								b: {
+									fontSize: 16,
+									lineHeight: 33
+								},
+								per: {
+									color: '#eee',
+									backgroundColor: '#000',
+									padding: [2, 4],
+									borderRadius: 2
+								}
+							}
+						}
+					},
+					data: [{
+							value: 1986,
+							name: '财务科'
+						},
+						{
+							value: 1986,
+							name: '环境科'
+						},
+						{
+							value: 1986,
+							name: '建设科'
+						},
+						{
+							value: 1986,
+							name: '信访办'
+						},
+					]
+				}]
+			};
+			zhanbi.setOption(zhanbioption);
+			var x = 0;
+			// 判断 名字
+			function isChinaName() {
+				var pattern = /^[\u4E00-\u9FA5]{1,6}$/;
+
+				if($.trim($('#name').val()).length == 0) {
+					$('#name').parent().find(".wc").text("*名称没有输入");
+				} else if(pattern.test($.trim($('#name').val())) == false) {
+					$('#name').parent().find(".wc").text("*名称输入错误");
+				} else {
+
+					$('#name').parent().find(".wc").text("");
+				}
+
+			}
+
+			// 判断 年龄 
+			function isage() {
+				if($("#age").val() > 0 && $("#age").val() < 90) {
+					$('#age').parent().find(".wc").text("");
+
+				} else {
+					$('#age').parent().find(".wc").text("*请输入正确的年龄");
+
+				}
+			}
+
+			// 判断职位
+			function iszw() {
+				if($("#zw").val() == "") {
+					$('#zw').parent().find(".wc").text("*职位未输入");
+				} else if($("#zw").val().length > 10) {
+					$('#zw').parent().find(".wc").text("*职位描述过长");
+				} else {
+					$('#zw').parent().find(".wc").text("");
+				}
+			}
+
+			// 判断科室
+			function isks() {
+				if($("#ks").val() == "") {
+					$('#ks').parent().find(".wc").text("*科室未输入");
+				} else if($("#ks").val().length > 8) {
+					$('#ks').parent().find(".wc").text("*科室描述过长");
+				} else {
+					$('#ks').parent().find(".wc").text("");
+				}
+			}
+
+			// 判断手机号码
+			function isPhoneNo() {
+				var pattern = /^1[34578]\d{9}$/;
+				if($.trim($('#phone').val()).length == 0) {
+					$('#phone').parent().find(".wc").text("*手机号没有输入");
+				} else if(pattern.test($.trim($('#phone').val())) == false) {
+					$('#phone').parent().find(".wc").text("*手机号码不正确");
+
+				} else {
+					$('#phone').parent().find(".wc").text("");
+				}
+			}
+
+			//判断地址
+			function isdz() {
+				if($("#address").val().length > 20) {
+					$('#address').parent().find(".wc").text("*地址描述过长");
+				} else {
+					$('#address').parent().find(".wc").text("");
+				}
+			}
+
+			$("#name").blur(isChinaName);
+			$("#age").blur(isage);
+			$("#zw").blur(iszw);
+			$("#ks").blur(isks);
+			$("#phone").blur(isPhoneNo);
+			$("#address").blur(isdz);
+			$("#qr").click(function() {
+				isChinaName();
+				isage();
+				iszw();
+				isks();
+				isPhoneNo();
+				isdz();
+
+				$(".wc").each(function(index) {
+					if($(".wc:eq(" + [index] + ")").text() != "") {
+						x++;
+					}
+				})
+
+				if(x == 0) {
+					$("form").submit();
+				} else {
+					alert("填写的有误,请确认后 提交");
+				}
+
+			})
+		</script>
+	</body>
+
+</html>

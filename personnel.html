@@ -1,0 +1,591 @@
+ <!--
+ 	(c) Copyright 2020 lu. All Rights Reserved. 
+ 	作者: 路  1270123648@qq.com
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+     <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <script src="js/jquery-3.3.1.min.js"></script> 
+        <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/echarts.min.js"></script>
+        <script type="text/javascript" src="theme/dark.js"></script>
+</head>
+<style>
+    html,
+    body {
+        margin: 0px;
+        width: 100%;
+        height: 100%;
+        background: #272936;
+    }
+     @media (min-width: 720px) {
+    	html, body {
+        overflow-y: hidden;
+        }
+    }
+
+    #mystage {
+        height: 100%;
+        width: 100%;
+        perspective: 500px;
+    }
+
+    #container {
+        height: 100%;
+        width: 100%;
+        transform-style: preserve-3d;
+        transform-origin: 100% 50%;
+    }
+
+    #canvas {
+        width: 140%;
+        height: 100%;
+        margin-left: -20%;
+        transform: rotateX(45deg) translate3d(0, 0px, 0px);
+        transform-origin: 50% 100%;
+    }
+
+    #canvas2 {
+        width: 140%;
+        height: 100%;
+        margin-left: -20%;
+        transform: rotateX(45deg);
+        transform-origin: 50% 100%;
+    }
+
+    #mychartcontainerid1 {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transform: rotateX(0deg) translate3d(0, 0px, 0px) scale3d(1, 1, 1);
+        transform-origin: 100% 100%;
+        animation: contentAnimation 2s;
+    }
+
+    @keyframes contentAnimation {
+        from {
+            transform: rotateX(30deg);
+        }
+        to {
+            transform: rotateX(0deg);
+        }
+    }
+    
+    .dropdown{
+		  	position: absolute;
+		  	left: 40px;
+		  	top: 10px;
+		  	height: 60%;
+    }
+    .dropdown{
+		  	width: 40%;
+    }
+	.dropdown-item{
+		  	text-align: center;
+		  	width: 10%;
+		  	padding: 2%;
+		  	margin: 0;
+		  	float: left;
+	}
+	.font{
+		  	margin-top: 10px;
+	}
+		  
+  .contenta{
+		  	height: 50%;
+	}
+	.sex{
+		  	box-shadow: 2px 2px 10px 3px rgba(31, 22, 45, 1);
+            border-radius: 4px;
+		  	width: 100%;
+		  	height: 100%;
+	}
+	.sex:hover{
+         box-shadow: 2px 2px 10px 3px rgba(61, 72, 85, 1);
+         border-radius: 3px;
+	}
+</style>
+<body>
+	
+<div id="mystage">
+    <div id="container" style="height: 100%;width: 100%;">
+        <canvas id="canvas" style="position: fixed;left: 0;top: 0;z-index: 20;"></canvas>
+        <canvas id="canvas2" style="position: fixed;left: 0;top: 0;z-index: 10;"></canvas>
+
+
+
+<!--  头部    -->
+<div class="header">
+			 <div class="dropdown">
+    <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
+      全镇
+    </button>
+    <div class="dropdown-menu dropdown-menu-right bg-secondary" id="dropdown-menu">
+      <a class="dropdown-item" href="#">杨寨村</a>
+      <a class="dropdown-item" href="#">玉王村</a>
+      <a class="dropdown-item" href="#">周庄村</a>
+       <a class="dropdown-item" href="#">周庄村</a>
+        <a class="dropdown-item" href="#">周庄村</a>
+         <a class="dropdown-item" href="#">周庄村</a>
+          <a class="dropdown-item" href="#">周庄村</a>
+           <a class="dropdown-item" href="#">周庄村</a>
+            <a class="dropdown-item" href="#">周庄村</a>
+             <a class="dropdown-item" href="#">周庄村</a>
+              <a class="dropdown-item" href="#">周庄村</a>
+               <a class="dropdown-item" href="#">周庄村</a>
+                <a class="dropdown-item" href="#">周庄村</a>
+                 <a class="dropdown-item" href="#">周庄村</a>
+                  <a class="dropdown-item" href="#">周庄村</a>
+                   <a class="dropdown-item" href="#">周庄村</a>      
+    </div>
+  </div>
+      <h4 class="font text-primary text-center">总人数<span class="text-danger">8656</span>人</h4>
+</div>
+
+<!--   主体  -->
+ <div id="mychartcontainerid1">
+   <div class="row" style="width: 80%;height:70%;background-color: rgba(0, 0, 0, 0.1);border-radius: 6px;margin: 60px auto auto;">
+      <!--   性别 外出 党员 表  -->      	
+        <div class="col-sm-12 col-md-7 contenta">
+		   <div class="sex" id="sex"></div>
+	    </div>
+	  <!--  人口比例  -->    
+	    <div class="col-sm-12 col-md-5 contenta">
+		   <div class="sex" id="people"></div>
+        </div>
+            <!-- 职业  -->    
+	    <div class="col-sm-12 col-md-4 contenta">
+		   <div class="sex" id="occ"></div>
+	    </div>
+	  <!--   年龄 外出 党员 表  -->    
+	    <div class="col-sm-12 col-md-4 contenta">
+		   <div class="sex" id="age"></div>
+	    </div>
+	  <!--  学历 外出 党员 表  -->    
+	    <div class="col-sm-12 col-md-4 contenta">
+		   <div class="sex" id="education"></div>
+	    </div>	
+	</div>
+</div>
+
+
+</div>
+</div>
+</body>
+
+<script type="text/javascript">
+	//  背景 画布    
+    var canvas = document.getElementById("canvas2");
+    var wHeight = window.innerHeight;
+    var wWidth = window.innerWidth;
+    canvas.height = wHeight;
+    canvas.width = wWidth;
+    var cxt = canvas.getContext("2d");
+
+    init();
+
+    function init() {
+        window.requestAnimationFrame(draw);
+        drawBackground();
+    }
+
+    function drawBackground() {
+        var canvas = document.getElementById("canvas");
+        var wHeight = window.innerHeight * 1.2;
+        var wWidth = window.innerWidth * 1.2;
+        canvas.height = wHeight;
+        canvas.width = wWidth;
+        var cxt = canvas.getContext("2d");
+        cxt.clearRect(0, 0, canvas.width, canvas.height);
+        var grd = cxt.createRadialGradient(wWidth / 2, wHeight, 0, wWidth / 2, wHeight / 2, wWidth / 2);
+        grd.addColorStop(0, "#0089ff");
+        grd.addColorStop(1, "rgba(39,41,54,0.4)");
+        cxt.strokeStyle = grd;
+        cxt.beginPath();
+        for (var i = 0; i <= wHeight; i += 40) {
+            cxt.moveTo(0, i);
+            cxt.lineTo(wWidth, i);
+        }
+        for (var i = 0; i <= wWidth; i += 40) {
+            cxt.moveTo(i, 0);
+            cxt.lineTo(i, wHeight);
+        }
+        cxt.closePath();
+        cxt.stroke();
+    }
+
+    var particles = [];
+    for (var i = 0; i < 3; i++) {
+        if (Math.random() > 0.5) {
+            particles.push(new Particle(Math.random() * wWidth, Math.random() * wHeight, 3, 0, 'rgba(255,255,255,0.8)'));
+            particles.push(new Particle(Math.random() * wWidth, Math.random() * wHeight, 0, 3, 'rgba(255,255,255,0.8)'));
+        } else {
+            particles.push(new Particle(Math.random() * wWidth, Math.random() * wHeight, -3, 0, 'rgba(255,255,255,0.8)'));
+            particles.push(new Particle(Math.random() * wWidth, Math.random() * wHeight, 0, -3, 'rgba(255,255,255,0.8)'));
+        }
+
+    }
+
+    function draw() {
+        cxt.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particles.length; i++) {
+            if (particles[i].x > wWidth || particles[i].y > wHeight) {
+                particles.splice(i, 1);
+                if (Math.random() > 0.5) {
+                    particles.push(new Particle(Math.random() * wWidth, Math.random() * wHeight, 3, 0, 'rgba(255,255,255,1)'));
+                    particles.push(new Particle(Math.random() * wWidth, Math.random() * wHeight, 0, -3, 'rgba(255,255,255,1)'));
+                } else {
+                    particles.push(new Particle(Math.random() * wWidth, Math.random() * wHeight, -3, 0, 'rgba(255,255,255,1)'));
+                    particles.push(new Particle(Math.random() * wWidth, Math.random() * wHeight, 0, 3, 'rgba(255,255,255,1)'));
+                }
+            } else {
+                particles[i].draw();
+            }
+        }
+        window.requestAnimationFrame(draw);
+    }
+
+    function Particle(sx, sy, Dx, Dy, Color) {
+        this.x = sx;
+        this.y = sy;
+        this.dx = Dx;
+        this.dy = Dy;
+        this.color = Color;
+        this.draw = function () {
+            var grd = cxt.createLinearGradient(this.x, this.y, this.x + this.dx * 10, this.y + this.dy * 10);
+            grd.addColorStop(0, "rgba(255,255,255,0)");
+            grd.addColorStop(0.7, "rgba(255,255,255,0.3)");
+            grd.addColorStop(1, "rgba(255,255,255,1)");
+            cxt.fillStyle = grd;
+            cxt.fillRect(this.x, this.y, this.dx * 10 + 3, this.dy * 10 + 3);
+            this.x += this.dx;
+            this.y += this.dy;
+        }
+    }
+
+
+//    图表
+ var  sex= echarts.init(document.getElementById('sex'),"dark");
+  var occ= echarts.init(document.getElementById('occ'),"dark");
+    var age= echarts.init(document.getElementById('age'),"dark");
+    var education=echarts.init(document.getElementById('education'),"dark");
+        var people=echarts.init(document.getElementById('people'),"dark");
+        
+      //  性别 外出  党员  三连表  
+    var sexoption = {
+    	title:{
+    		text:"性别比例_外出比例_ 党员比例",
+    		left:"center",
+    	},
+    tooltip: {
+        trigger: 'item',
+        formatter: "{b}:{c}({d}%)"
+    },
+    series: [
+        {   
+        	name:'男女比例',
+            type: 'pie',
+            radius: "70%",
+            center : ['15%', '50%'],
+            label: {
+              normal: {
+                position: 'inner',
+                formatter: '{b}\n{d}%\n{c}人',
+                textStyle: {
+                    color: '#fff',
+                    fontWeight: 'bold',
+                    fontSize: 14
+                }
+              }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            avoidLabelOverlap: false,
+            data: [{
+                    value: 225,
+                    name: '男性',
+                },
+                {
+                    value: 300,
+                    name: '女性',
+                }
+            ]
+        },
+        {
+        	 name:'外出比例',
+            type: 'pie',
+            radius: "70%",
+            center : ['50%', '50%'],
+            label: {
+              normal: {
+                position: 'inner',
+                formatter: '{b}\n{d}%\n{c}人',
+                textStyle: {
+                    color: '#fff',
+                    fontWeight: 'bold',
+                    fontSize: 14
+                }
+              }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            avoidLabelOverlap: false,
+            data: [{
+                    value: 889,
+                    name: '在家',
+                },
+                {
+                    value: 622,
+                    name: '外出',
+                }
+            ]
+        },
+             {
+        	 name:'党员比例',
+            type: 'pie',
+            radius: "70%",
+            center : ['85%', '50%'],
+            avoidLabelOverlap: false,
+            label: {
+              normal: {
+                position: 'inner',
+                formatter: '{b}\n{d}%\n{c}人',
+                textStyle: {
+                    color: '#fff',
+                    fontWeight: 'bold',
+                    fontSize: 14
+                }
+              }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data: [{
+                    value: 66,
+                    name: '群众',
+                },
+                {
+                    value: 25,
+                    name: '党员',
+                },
+                  {
+                    value: 16,
+                    name: '团员',
+                },
+                {
+                    value: 5,
+                    name: '其他',
+                }
+            ]
+        }
+    ]
+};
+
+
+//  职业 表
+ var occoption = {
+ 	  title : {
+        text: '职业比例',
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    series: [
+        {
+            name:'职业类型分布',
+            type:'pie',
+            label: {
+            },
+            data:[
+                {value:3350, name:'农业'},
+                {value:310, name:'公职'},
+                {value:23, name:'电子商务'},
+                {value:13, name:'自主创业'},
+                {value:148, name:'商铺'},
+                {value:251, name:'养殖业'},
+                {value:2, name:'工人'},
+                {value:2001, name:'学生'}
+            ]
+        }
+    ]
+};
+
+// 年龄 option 配置 
+var ageoption= {
+    title : {
+        text: '年龄统计',
+    },
+    tooltip : {
+        trigger: 'axis',
+         axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        show : true,
+        feature : {
+
+            magicType : {show: true, type: ['line', 'bar']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    xAxis : [
+        {
+        	 type: 'category',
+        	   show: false,
+            data : ['0-2岁','3-5岁','5-10岁','11-15岁','16-20岁','21-25岁','26-30岁','30-35岁','36-40岁','41-50岁','51-60岁','61-80岁'],
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value',
+              show: false,
+        }
+    ], 
+    series : [
+        {
+            name:'年龄',
+            type:'bar',
+            barWidth: '80%',
+            itemStyle: {
+                normal: {
+                    label: {
+                        show: true,
+                        position: 'top',
+                        formatter: '{b}\n{c}'
+                    }
+                }
+            },
+            data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+        },
+      
+    ]
+};
+        //学历比例
+  var educationoption = {
+  	  title : {
+        text: '学历比例',
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        x: 'right',
+        data:['初中及以下','高中','中专',"大专","本科","本科以上"]
+    },
+    series: [
+        {
+            name:'学历比例',
+            type:'pie',
+            radius: ['50%', '85%'],
+            center : ['45%', '50%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data:[
+                {value:234, name:'初中及以下'},
+                {value:1548, name:'高中'},
+                {value:135, name:'中专'},    
+                {value:1548, name:'大专'},
+                {value:1548, name:'本科'},
+                {value:1548, name:'本科以上'},
+            ]
+        }
+    ]
+};
+
+//人口比例
+var peopleoption = {
+    title : {
+        text: '人口比例',
+        subtext: '',
+        x:'left'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+    	  type: 'scroll',
+        orient: 'vertical',
+        left: 'right',
+        data: ['**村','qq村','ww村','ee村','rr村','tt村','yy村','uu村','ii村','oo村','pp村'],
+      
+    },
+    series : [
+        {
+            name: '访问来源',
+            type: 'pie',
+            radius : '55%',
+            center: ['50%', '60%'],
+            data:[
+                {value:335, name:'**村'},
+                {value:310, name:'qq村'},
+                {value:234, name:'ww村'},
+                {value:135, name:'ee村'},
+                {value:1548, name:'rr村'},
+                {value:1548, name:'tt村'},
+                {value:1548, name:'yy村'},
+                {value:1548, name:'uu村'},
+                {value:1548, name:'ii村'},
+                {value:1548, name:'oo村'},
+                {value:1548, name:'pp村'},
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+
+sex.setOption(sexoption);
+occ.setOption(occoption);
+age.setOption(ageoption);
+education.setOption(educationoption);
+people.setOption(peopleoption);
+
+</script>
+</html>

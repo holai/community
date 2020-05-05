@@ -1,0 +1,414 @@
+ <!--
+ 	(c) Copyright 2020 lu. All Rights Reserved. 
+ 	作者: 路  1270123648@qq.com
+ -->
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" /> 
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <script src="js/jquery-3.3.1.min.js"></script> 
+        <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/echarts.min.js"></script>
+        <script src="js/countUp.js"></script>
+        <script type="text/javascript" src="theme/dark.js"></script>
+   		<title></title>
+   	<style> 
+   		html{
+		  	height: 100%;
+		}
+		body{
+		  	height: 100%;
+		  	background:url(img/nybj.png);
+		  	padding: 0;
+		  	margin: 0;
+		}
+	   .font-content{
+       	  font-size: 2em;
+          color: #ddd;
+          text-align: center;
+          font-family: 'ITV Reem';
+       }
+       .text-danger{
+   	        width: 200px;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+            fill: #fff;
+       }
+       .row{
+       	width: 99%;
+       	height:42%;
+       	margin: 0 auto;
+       }
+       .shouru{
+       	height:100%;
+       }
+	</style>
+	</head>
+<body>
+	<div class="row"> 	
+		    <div class="font-content  col-sm-12 col-md-12">总收入：<string class="text-danger" id="count">9999</string>  万元</div>
+			<div class="shouru col-sm-12 col-md-6" id="shouru"></div>
+			<div class="shouru col-sm-12 col-md-6" id="shourubar"></div>
+			<div class="font-content  col-sm-12 col-md-12">总支出：<string class="text-danger" id="count2">99</string>  万元</div>
+		    <div class="shouru col-sm-12 col-md-6" id="zhichu"></div>
+		    <div class="shouru col-sm-12 col-md-6" id="zhichubar"></div>
+	 </div>
+<script>
+var demo = new CountUp("count",0, 86666, 0,3),demo2 = new CountUp("count2",0, 99, 0,3);
+demo.start();
+demo2.start();
+
+   var sr=echarts.init(document.getElementById("shouru"),"dark"); 
+   var srb=echarts.init(document.getElementById("shourubar"),"dark");
+    var zc=echarts.init(document.getElementById("zhichu"),"dark"); 
+   var zcb=echarts.init(document.getElementById("zhichubar"),"dark"); 
+   var sroption = {
+   	    title: {
+        text: '月收入    单位:万元',
+        left: 'center',
+        top: 'bottom'
+    },
+    tooltip : {
+        trigger: 'axis',
+    },
+    toolbox: {
+        show : true,
+       left: 'right',
+         orient: 'vertical',
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line','bar','stack', 'tiled']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    legend: {
+        data: ['房产税','车船使用税','个人所得税','地方企业所得税',"营业税"]
+    },
+    xAxis : [
+        {
+            type : 'category',
+            splitLine : {show : false},
+            data :['一月','二月','三月','四月','五月','六月','七月',"八月","九月","十月","十一月","十二月"]
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value',
+    
+        }
+    ],
+    series : [
+        {
+            name:'房产税',
+            type:'line',
+            data:[320, 332, 301, 334, 390, 330, 320,355,182, 191, 234, 290,]
+        },
+        {
+            name:'车船使用税',
+            type:'line',
+            data:[120, 132, 101, 134, 90, 230, 210,287, 132, 101, 134, 90,]
+        },
+        {
+            name:'个人所得税',
+            type:'line',
+            data:[220, 182, 191, 234, 290, 330, 310,182,301, 334, 390, 330, ]
+        },
+        {
+            name:'地方企业所得税',
+            type:'line',
+            data:[150, 232, 201, 154, 190, 330, 410,400,201, 154, 190, 330,]
+        },
+         {
+            name:'营业税',
+            type:'line',
+            data:[150, 232, 201, 154, 190, 330, 410,388,232, 201, 154, 190,]
+        },
+    ]
+};
+
+
+  
+
+ 
+var srboption = {
+	title:{
+		text:"总收入 比例",
+		left:"center",
+		top:"bottom",
+	},
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c}万 ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'right',
+        data: ['房产税','车船使用税','个人所得税','地方企业所得税',"营业税"]
+    },
+    series: [
+       {
+            name:'财政管理',
+            type:'pie',
+            selectedMode: 'single',
+            radius: [0, '30%'],
+
+            label: {
+                normal: {
+                    position: 'inner'
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data:[
+                {value:335, name:'预算内资金', selected:true},
+                {value:679, name:'预算外资金'},
+                {value:1548, name:'乡镇自有资金'}
+            ]
+        },
+   
+        {
+            name:'税收',
+            type:'pie',
+            radius: ['40%', '55%'],
+            label: {
+                normal: {
+                    formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}万  {per|{d}%}  ',
+                    borderColor: '#aaa',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    // shadowBlur:3,
+                    // shadowOffsetX: 2,
+                    // shadowOffsetY: 2,
+                    // shadowColor: '#999',
+                    // padding: [0, 7],
+                    rich: {
+                        a: {
+                            color: '#999',
+                            lineHeight: 22,
+                            align: 'center'
+                        },
+                        // abg: {
+                        //     backgroundColor: '#333',
+                        //     width: '100%',
+                        //     align: 'right',
+                        //     height: 22,
+                        //     borderRadius: [4, 4, 0, 0]
+                        // },
+                        hr: {
+                            borderColor: '#aaa',
+                            width: '100%',
+                            borderWidth: 0.5,
+                            height: 0
+                        },
+                        b: {
+                            fontSize: 16,
+                            lineHeight: 33
+                        },
+                        per: {
+                            color: '#eee',
+                            backgroundColor: '#334455',
+                            padding: [2, 4],
+                            borderRadius: 2
+                        }
+                    }
+                }
+            },
+           data: [{
+                    value:500,
+                    name: '房产税'
+                }, {
+                    value: 800,
+                    name: '车船使用税'
+                }, {
+                    value: 900,
+                    name: '个人所得税'
+                }, {
+                    value: 500,
+                    name: '地方企业所得税'
+                }, {
+                    value: 600,
+                    name: '营业税'
+                }]
+        }
+    ]
+};
+
+
+//   每月支出  
+var zcoption = {
+	title: {
+        text: '月支出    单位:万元',
+        left: 'center',
+        top: 'bottom'
+    },
+    tooltip : {
+        trigger: 'axis',
+        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    legend: {
+        data:['公务员工资','建设支出','维护支出','补贴支出',"经费支出"]
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    xAxis : [
+        {
+            type : 'value'
+        }
+    ],
+    yAxis : [
+        {
+            type : 'category',
+            data : ['一月','二月','三月','四月','五月','六月','七月',"八月","九月","十月","十一月","十二月"]
+        }
+    ],
+    series : [
+        {
+            name:'公务员工资',
+            type:'bar',
+            stack: '总量',
+            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+            data:[320, 302, 301, 334, 390, 330, 320, 330, 310,120, 132, 101]
+        },
+        {
+            name:'建设支出',
+            type:'bar',
+            stack: '总量',
+            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+            data:[120, 132, 101, 134, 90, 230, 210, 182, 191, 234, 290, 330]
+        },
+        {
+            name:'维护支出',
+            type:'bar',
+            stack: '总量',
+            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+            data:[220, 182, 191, 234, 290, 330, 310,120, 132, 101, 134, 90]
+        },
+        {
+            name:'补贴支出',
+            type:'bar',
+            stack: '总量',
+            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+            data:[150, 212, 201, 154, 190, 330, 410, 832, 901, 934, 129,566]
+        },
+        {
+            name:'经费支出',
+            type:'bar',
+            stack: '总量',
+            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+            data:[820, 832, 901, 934, 1290, 1330,212, 201, 154, 190,154]
+        }
+    ]
+};
+            
+
+
+// 总收入  图
+var zcboption = {
+	title:{
+		text:"总税收 比例",
+		left:"center",
+		top:"bottom",
+	},
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c}万 ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        x: 'right',
+        data: ['公务员工资','建设支出','维护支出','补贴支出',"经费支出"]
+    },
+    series: [
+   
+        {
+            name:'税收',
+            type:'pie',
+            radius: ['0%', '55%'],
+            label: {
+                normal: {
+                    formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}万  {per|{d}%}  ',
+                    borderColor: '#aaa',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    // shadowBlur:3,
+                    // shadowOffsetX: 2,
+                    // shadowOffsetY: 2,
+                    // shadowColor: '#999',
+                    // padding: [0, 7],
+                    rich: {
+                        a: {
+                            color: '#999',
+                            lineHeight: 22,
+                            align: 'center'
+                        },
+                        // abg: {
+                        //     backgroundColor: '#333',
+                        //     width: '100%',
+                        //     align: 'right',
+                        //     height: 22,
+                        //     borderRadius: [4, 4, 0, 0]
+                        // },
+                        hr: {
+                            borderColor: '#aaa',
+                            width: '100%',
+                            borderWidth: 0.5,
+                            height: 0
+                        },
+                        b: {
+                            fontSize: 16,
+                            lineHeight: 33
+                        },
+                        per: {
+                            color: '#eee',
+                            backgroundColor: '#334455',
+                            padding: [2, 4],
+                            borderRadius: 2
+                        }
+                    }
+                }
+            },
+           data: [{
+                    value:300,
+                    name: '公务员工资'
+                }, {
+                    value: 360,
+                    name: '建设支出'
+                }, {
+                    value: 200,
+                    name: '维护支出'
+                }, {
+                    value: 500,
+                    name: '补贴支出'
+                }, {
+                    value: 600,
+                    name: '经费支出'
+                }]
+        }
+    ]
+};
+              sr.setOption(sroption);      
+              srb.setOption(srboption); 
+              zc.setOption(zcoption);
+              zcb.setOption(zcboption); 
+
+
+
+		
+	</script>
+	</body>
+</html>

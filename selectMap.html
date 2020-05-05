@@ -1,0 +1,104 @@
+ <!--
+ 	(c) Copyright 2020 lu. All Rights Reserved. 
+ 	作者: 路  1270123648@qq.com
+ -->
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<style type="text/css">
+			body,
+			html {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				font-family: "微软雅黑";
+			}
+			
+			#allmap {
+				height: 95%;
+				width: 100%;
+			}
+			
+			#inposition {
+				height: 5%;
+				text-align: center;
+			}
+		</style>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=w4cOvRn46v19ko0igGtnKA5ed98YH7SD"></script>
+		<title>设置线、面可编辑</title>
+	</head>
+
+	<body>
+		<div id="allmap"></div>
+		<div id="inposition">
+			<input type="text" placeholder="请输入大致位置" />
+			<button class="btn btn-info">跳转</button>
+			<button class="btn btn-success">确认</button>
+			<span class="alert-danger">拖拽红标，以确定位置</span>
+		</div>
+	</body>
+
+</html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	map.centerAndZoom(new BMap.Point(112.812717, 34.162778), 14);
+	map.enableScrollWheelZoom();
+	var myGeo = new BMap.Geocoder();
+	//	var polygon;
+	var marker;
+	$("#inposition button:first").click(function() {
+
+		// 将地址解析结果显示在地图上,并调整地图视野
+		myGeo.getPoint($("#inposition input").val(), function(point) {
+			if(point) {
+				// point lng lat
+				/*  圈地方案
+					map.centerAndZoom(point, 16);
+					map.addOverlay(new BMap.Marker(point));
+					polygon = new BMap.Polygon([
+						new BMap.Point(point.lng + 0.005000, point.lat + 0.005000),
+						new BMap.Point(point.lng - 0.005000, point.lat + 0.005000),
+						new BMap.Point(point.lng - 0.005000, point.lat - 0.005000),
+						new BMap.Point(point.lng + 0.005000, point.lat - 0.005000)
+					], {
+						strokeColor: "blue",
+						strokeWeight: 2,
+						strokeOpacity: 0.5
+					}); //创建多边形
+					map.addOverlay(polygon); //增加多边形
+					polygon.enableEditing();
+				*/
+				map.centerAndZoom(point, 16);
+				marker = new BMap.Marker(point);
+				map.addOverlay(marker);
+				marker.enableDragging();
+			} else {
+				alert("您选择地址没有解析到结果!");
+			}
+		}, "汝州市");
+	});
+	$("#inposition button:last").click(function() {
+		// 向后端提交坐标 polygon 数组
+		/*
+			if(polygon == null) {
+					alert("请先选点");
+				}else {
+					alert("向后端提交坐标数组" + "\n" + JSON.stringify(polygon.getPath()));
+			}
+		*/
+		if(marker == null) {
+			alert("请先选点");
+		} else {
+			var point = marker.getPosition();
+			window.opener.sele(point.lng + "," + point.lat);
+			window.close();
+		}
+	});
+</script>
